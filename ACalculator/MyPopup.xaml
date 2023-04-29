@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup" 
+             xmlns:acalculator="clr-namespace:ACalculator" x:DataType="acalculator:MyViewModel"
+             x:Class="ACalculator.MyPopup">
+
+    <!--<StackLayout Margin="12" Padding="24" Spacing="24" BackgroundColor="Black"-->
+    <!-- HorizontalOptions="Center" VerticalOptions="EndAndExpand">-->
+    <Frame CornerRadius="20" BackgroundColor="Black" Margin="12" Padding="24" HorizontalOptions="Center"
+               VerticalOptions="EndAndExpand">  
+            <Label x:Name="myPopup" Text="Popup" TextColor="White"
+            VerticalOptions="CenterAndExpand"
+            HorizontalOptions="CenterAndExpand" />
+        </Frame>
+
+    <!--</StackLayout>-->
+
+</pages:PopupPage>
