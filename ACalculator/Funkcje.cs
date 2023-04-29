@@ -28,8 +28,8 @@ namespace ACalculator
             {
                 if (orientation.Contains("land"))
                 {
-                    MainPage.FrameText.HeightRequest = heightInDp * 0.2;
-                    MainPage.GridButton.HeightRequest = heightInDp * 0.8;
+                    MainPage.FrameText.HeightRequest = heightInDp * 0.5;
+                    MainPage.GridButton.HeightRequest = heightInDp * 0.5;
                     MainPage.PasekWyniku.FontSize = 0.7f * fontSize;
                     MainPage.PasekFormuly.FontSize = 0.4f * fontSize;
                     foreach (var items in MainPage.GridButton.Children)
@@ -46,11 +46,11 @@ namespace ACalculator
                 NewPopup(ex.Message + ":ChangeFontAndPAdding");
             }
 
-            MainPage.FrameText.HeightRequest = heightInDp * 0.3;
-            MainPage.GridButton.HeightRequest = heightInDp * 0.7;
+            MainPage.FrameText.HeightRequest = heightInDp * 0.4;
+            MainPage.GridButton.HeightRequest = heightInDp * 0.6;
             try
             {
-                if (heightInDp < 380)
+                if (heightInDp <= 320)
                 {
                     MainPage.PasekWyniku.FontSize = 0.4f * fontSize;
                     MainPage.PasekFormuly.FontSize = 0.2f * fontSize;
@@ -68,7 +68,7 @@ namespace ACalculator
             }
             try
             {
-                if (heightInDp >= 380 && heightInDp < 720)
+                if (heightInDp > 320 && heightInDp < 720)
                 {
                     MainPage.PasekWyniku.FontSize = 0.8f * fontSize;
                     MainPage.PasekFormuly.FontSize = 0.5f * fontSize;

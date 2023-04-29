@@ -22,16 +22,16 @@ namespace ACalculator
             WidthInDp = widthInDp;
             HeightInDp = heightInDp;
 
-            AppTheme theme = AppInfo.RequestedTheme;
-            switch (theme)
-            {
-                case AppTheme.Light:
-                    PasekWyniku.TextColor = Color.Black;
-                    break;
-                case AppTheme.Dark:
-                    PasekWyniku.TextColor = Color.Black;
-                    break;
-            }
+            //AppTheme theme = AppInfo.RequestedTheme;
+            //switch (theme)
+            //{
+            //    case AppTheme.Light:
+            //        PasekWyniku.TextColor = Color.Black;
+            //        break;
+            //    case AppTheme.Dark:
+            //        PasekWyniku.TextColor = Color.Black;
+            //        break;
+            //}
 
             if (HeightInDp <= 320)
             {

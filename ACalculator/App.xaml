@@ -3,26 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ACalculator.App">
     <Application.Resources>
-        <ResourceDictionary>
-
-            <Color x:Key="PrimaryColor">Silver</Color>
-            <Color x:Key="SecondaryColor">White</Color>
-
-
-            <Style TargetType="Label">
-                <Setter Property="TextColor" Value="{DynamicResource PrimaryColor}" />
-                <Setter Property="FontFamily" Value="OpenSansRegular" />
-            </Style>
-            <Style TargetType="Button" x:Name="button_style">
-                <Setter Property="TextColor" Value="{DynamicResource SecondaryColor}" />
-                <Setter Property="FontFamily" Value="OpenSansRegular" />
-                <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}" />
-                <Setter Property="Padding" Value="15" />
-                <Setter Property="FontSize" Value="28"/>
-                <Setter Property="CornerRadius" Value="35"/>
-            </Style>
-
-
-        </ResourceDictionary>
+        
     </Application.Resources>
 </Application>
