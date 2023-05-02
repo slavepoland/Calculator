@@ -38,12 +38,21 @@ namespace ACalculator
                         item.FontSize = 0.28f * fontSize;
                         item.Padding = 0;
                     }
+                    foreach (var items in MainPage.GridPages.Children)
+                    {
+                        if(items is Button)
+                        {
+                            Button item = items as Button;
+                            item.FontSize = 0.28f * fontSize;
+                            item.Padding = 0;
+                        }
+                    }
                     return;
                 }
             }
             catch (Exception ex)
             {
-                NewPopup(ex.Message + ":ChangeFontAndPAdding");
+                NewPopup(ex.Message + ":Landscape");
             }
 
             MainPage.FrameText.HeightRequest = heightInDp * 0.4;
@@ -64,7 +73,7 @@ namespace ACalculator
             }
             catch (Exception ex)
             {
-                NewPopup(ex.Message + ":ChangeFontAndPAdding");
+                NewPopup(ex.Message + ":Portrait, 320");
             }
             try
             {
@@ -82,7 +91,7 @@ namespace ACalculator
             }
             catch(Exception ex) 
             {
-                NewPopup(ex.Message + ":ChangeFontAndPAdding");
+                NewPopup(ex.Message + ":Portrait, 321-719");
             }
             try
             {
@@ -100,7 +109,7 @@ namespace ACalculator
             }
             catch (Exception ex)
             {
-                NewPopup(ex.Message + ":ChangeFontAndPAdding");
+                NewPopup(ex.Message + ":Portrait, >720");
             }
 
 
@@ -302,6 +311,11 @@ namespace ACalculator
 
         public string ClickLiczba(string textPaskaWyniku)
         {
+            if(textPaskaWyniku.Length > 15)
+            {
+                NewPopup("Nie można wprowadzić więcej niż 15 cyfr.");
+                return textPaskaWyniku;
+            }
             try
             {
                 if (Global.BoolPierwszaLiczba == true && Global.GlobalDzialanie == null)

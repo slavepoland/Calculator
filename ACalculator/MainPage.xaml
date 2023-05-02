@@ -2,48 +2,15 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ACalculator.MainPage">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <Color x:Key="PrimaryColor">Black</Color>
-            <Color x:Key="SecondaryColor">White</Color>
-            <Color x:Key="ThirdColor">Silver</Color>
-
-            <Style TargetType="Label">
-                    <Setter Property="TextColor" Value="{DynamicResource PrimaryColor}" />
-                    <Setter Property="FontFamily" Value="OpenSansRegular" />
-             </Style>
-
-                <Style x:Key="button_style" TargetType="Button" >
-                    <Setter Property="TextColor" Value="{DynamicResource SecondaryColor}" />
-                    <Setter Property="FontFamily" Value="OpenSansRegular" />
-                <Setter Property="BackgroundColor" Value="{DynamicResource ThirdColor}" />
-                    <Setter Property="Padding" Value="15" />
-                    <Setter Property="FontSize" Value="28"/>
-                    <Setter Property="CornerRadius" Value="30"/>
-                </Style>
-
-            <Style x:Key="btn_operation" TargetType="Button" BasedOn="{StaticResource button_style}">
-                <Setter Property="TextColor" Value="Green"/>
-            </Style>
-
-            <Style x:Key="btn_pages" TargetType="Button" BasedOn="{StaticResource button_style}">
-                <Setter Property="BackgroundColor" Value="Transparent"/>
-                <Setter Property="TextColor" Value="Silver"/>
-                <Setter Property="FontSize" Value="20"/>
-                <Setter Property="TextColor" Value="BlueViolet"/>
-                <!--<Setter Property="HeightRequest" Value="50"/>-->
-            </Style>
-
-        </ResourceDictionary>
-    </ContentPage.Resources>
+    
 
     <StackLayout Padding="10" x:Name="Stack">
 
         <StackLayout>
             <Frame x:Name="FrameText" BackgroundColor="WhiteSmoke" Padding="10" Margin="0,0,0,10">
                 <StackLayout>
-                    <Label x:Name="PasekFormuly" FontSize="25" FontAttributes="Bold" HorizontalOptions="End" />
-                    <Label x:Name="PasekInvisible" FontSize="5" FontAttributes="Bold" HorizontalOptions="End" />
+                    <Label x:Name="PasekFormuly" FontSize="25"  HorizontalOptions="End" />
+                    <Label x:Name="PasekInvisible" FontSize="30"  HorizontalOptions="End" />
                     <Label x:Name="PasekWyniku" Text="0" FontSize="45" FontAttributes="Bold" HorizontalOptions="End" />
 
                     <Grid x:Name="GridPages">
@@ -59,12 +26,12 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Button x:Name="Btn_history" Text="Historia" Grid.Row="1" Grid.Column="0" Style="{StaticResource btn_pages}"
-                            ImageSource="history.png"/>
-                        <Button x:Name="Btn_converter" Text="Przel. jedn" Grid.Row="1" Grid.Column="1" Style="{StaticResource btn_pages}"
-                                ImageSource="line.png" />
-                        <Button x:Name="Btn_clear1" Text="C" Grid.Row="1" Grid.Column="3" Clicked="BtnDelete" 
+                            ImageSource="history.png" Clicked="Btn_History"/>
+                    <Button x:Name="Btn_converter" Text="Przel. jedn" Grid.Row="1" Grid.Column="1" Style="{StaticResource btn_pages}"
+                            ImageSource="line.png" Clicked="Btn_converter_Clicked"/>
+                    <Button x:Name="Btn_clear" Text="C" Grid.Row="1" Grid.Column="3" Clicked="BtnDelete" 
                                 Style="{DynamicResource btn_pages}" ImageSource="ic_c.png"/>
-                        <Button x:Name="Btn_delete1" Text="Del" Grid.Row="1" Grid.Column="4" Style="{StaticResource btn_pages}" 
+                    <Button x:Name="Btn_delete" Text="Del" Grid.Row="1" Grid.Column="4" Style="{StaticResource btn_pages}" 
                                ImageSource="ic_shortcut_backspace.png" Clicked="BtnDelete"/>
                         <!--⌫-->
                 </Grid>

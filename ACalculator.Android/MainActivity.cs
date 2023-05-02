@@ -2,12 +2,19 @@
 using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
+using ACalculator;
+using Xamarin.Forms;
+using Android.Views.InputMethods;
+using Xamarin.Forms.Platform.Android;
+using System;
+using Android.Content;
 
+[assembly: ExportRenderer(typeof(NoKeyboardEntry), typeof(ACalculator.Droid.NoKeyboardEntryRenderer))]
 namespace ACalculator.Droid
 {
-    [Activity(Label = "ACalculator", Icon = "@mipmap/ic_launcher", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation
-        | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize |
-        ConfigChanges.Orientation | ConfigChanges.ScreenSize)]
+    [Activity(Label = "Calculator", Icon = "@mipmap/ic_launcher", Theme = "@style/MainTheme", MainLauncher = true, 
+         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation
+        | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize | ConfigChanges.Orientation | ConfigChanges.ScreenSize)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         public static int WidthInDp { get; set; }
@@ -52,9 +59,69 @@ namespace ACalculator.Droid
 
         private int ConvertPixelsToDp(float pixelValue)
         {
-            var dp = (int)((pixelValue) / Resources.DisplayMetrics.Density);
+            var dp = (int)(pixelValue / Resources.DisplayMetrics.Density);
             return dp;
         }
 
+    }
+
+    public class NoKeyboardEntryRenderer : EntryRenderer
+    {
+
+        public NoKeyboardEntryRenderer(Context context) : base(context)
+        {
+        }
+
+        protected override void OnFocusChangeRequested(object sender, VisualElement.FocusRequestArgs e)
+        {
+            e.Result = true;
+
+            if (e.Focus)
+                this.Control.RequestFocus();
+            else
+                this.Control.ClearFocus();
+
+            // Disable the Keyboard on Focus
+            Control.ShowSoftInputOnFocus = false;
+        }
+
+        protected override void OnElementChanged(ElementChangedEventArgs<Entry> e)
+        {
+            base.OnElementChanged(e);
+
+            if (e.NewElement != null)
+            {
+                ((NoKeyboardEntry)e.NewElement).PropertyChanging += OnPropertyChanging;
+            }
+
+            if (e.OldElement != null)
+            {
+                ((NoKeyboardEntry)e.OldElement).PropertyChanging -= OnPropertyChanging;
+            }
+            // Disable the Keyboard on Focus
+            Control.ShowSoftInputOnFocus = false;
+        }
+
+        private void OnPropertyChanging(object sender, PropertyChangingEventArgs propertyChangingEventArgs)
+        {
+            // Check if the view is about to get Focus
+            if (propertyChangingEventArgs.PropertyName == VisualElement.IsFocusedProperty.PropertyName)
+            {
+                try
+                {
+                    // Disable the Keyboard on Focus
+                    Control.ShowSoftInputOnFocus = false;
+
+                    // incase if the focus was moved from another Entry
+                    // Forcefully dismiss the Keyboard 
+                    InputMethodManager imm = (InputMethodManager)Context.GetSystemService(Context.InputMethodService);
+                    imm.HideSoftInputFromWindow(Control.WindowToken, 0);
+                }
+                catch (Exception ex)
+                {
+                    _ = ex;
+                }
+            }
+        }
     }
 }

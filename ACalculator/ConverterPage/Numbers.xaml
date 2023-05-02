@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ACalculator.Numbers">
+
+        <Frame>
+            <!--klawiatura-->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <!-- row number 1-->
+                <Button x:Name="Btn_seven" Text="7" Grid.Row="0" Grid.Column="0"  Style="{DynamicResource button_style}"/>
+                <Button x:Name="Btn_eight" Text="8" Grid.Row="0" Grid.Column="1"  Style="{DynamicResource button_style}"/>
+                <Button x:Name="Btn_nine" Text="9" Grid.Row="0" Grid.Column="2"  Style="{DynamicResource button_style}"/>
+                <Button x:Name="Btn_delete" Text="Del" Grid.Row="0" Grid.Column="3" Style="{DynamicResource btn_operation}"/>
+
+                <!-- row number 2-->
+                <Button x:Name="Btn_four" Text="4" Grid.Row="1" Grid.Column="0" Style="{DynamicResource button_style}"/>
+                <Button x:Name="Btn_five" Text="5" Grid.Row="1" Grid.Column="1" Style="{DynamicResource button_style}"/>
+                <Button x:Name="Btn_six" Text="6" Grid.Row="1" Grid.Column="2" Style="{DynamicResource button_style}"/>
+                <Button x:Name="Btn_clear" Text="C" TextColor="Red" Grid.Row="1" Grid.Column="3" Style="{DynamicResource btn_operation}"/>
+
+                <!-- row number 3-->
+                <Button x:Name="Btn_one" Text="1" Grid.Row="2" Grid.Column="0" Style="{DynamicResource button_style}"/>
+                <Button x:Name="Btn_two" Text="2" Grid.Row="2" Grid.Column="1" Style="{DynamicResource button_style}"/>
+                <Button x:Name="Btn_three" Text="3" Grid.Row="2" Grid.Column="2" Style="{DynamicResource button_style}"/>
+                <Button x:Name="Btn_add" Text="Up" Grid.Row="2" Grid.Column="3" Style="{DynamicResource btn_operation}"/>
+
+                <!-- row number 4-->
+                <Button x:Name="Btn_addsubtract" Text="+/-" Grid.Row="3" Grid.Column="0" Style="{DynamicResource button_style}"/>
+                <Button x:Name="Btn_zero" Text="0" Grid.Row="3" Grid.Column="1" Style="{DynamicResource button_style}"/>
+                <Button x:Name="Btn_comma" Text="," Grid.Row="3" Grid.Column="2" Style="{DynamicResource button_style}"/>
+                <Button x:Name="Btn_equals" Text="Down" Grid.Row="3" Grid.Column="3" Style="{DynamicResource btn_operation}"/>
+            </Grid>
+        </Frame>
+
+</ContentPage>
