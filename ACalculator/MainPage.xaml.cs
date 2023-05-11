@@ -223,12 +223,12 @@ namespace ACalculator
 
         private async void Btn_converter_Clicked(object sender, EventArgs e)
         {//App.Current.MainPage = new Converter();
-            await Navigation.PushModalAsync(new NavigationPage(new Converter()));  //Converter()
+            await Navigation.PushModalAsync(new CarouselPage());  //Converter()
         }
 
-        private async void Btn_History(object sender, EventArgs e)
+        private void Btn_History(object sender, EventArgs e)
         {//App.Current.MainPage = new Converter();
-            await Navigation.PushModalAsync(new CarouselPage());  //Converter()
+            //await Navigation.PushModalAsync(new CarouselPage());  //Converter()
         }
 
 

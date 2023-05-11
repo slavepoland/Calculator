@@ -17,11 +17,11 @@ namespace ACalculator
             InitializeComponent();
             Btn_addsubtract.IsEnabled = false;
 
-            ConverterClass cc = new ConverterClass();
-            picker.ItemsSource = cc.converterLength;
-            picker.SelectedIndex = 4;
-            picker1.ItemsSource = cc.converterLength;
-            picker1.SelectedIndex = 1;
+            //ConverterClass cc = new ConverterClass();
+            //picker.ItemsSource = cc.converterLength;
+            //picker.SelectedIndex = 4;
+            //picker1.ItemsSource = cc.converterLength;
+            //picker1.SelectedIndex = 1;
         }
 	}
 }

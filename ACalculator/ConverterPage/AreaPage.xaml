@@ -1,24 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local1="clr-namespace:ACalculator.ConverterPage"
              x:Class="ACalculator.AreaPage"
              xmlns:local="clr-namespace:ACalculator">
     <ContentPage.Content>
-        <StackLayout>
-            
-            <Frame> <!--nagłówek-->
-                <Grid HorizontalOptions="Center">
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Label Text="Powierzchnia     >" Grid.Row="0" Grid.Column="0"/>
-                </Grid>
-            </Frame>
+        <StackLayout >
+            <local1:HeadingPage/>
 
-            <Frame> <!--grid with przeliczniki Up-->
+            <Frame Style="{DynamicResource frame_style}"> <!--grid with przeliczniki Up-->
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition />
@@ -45,7 +35,7 @@
                 </Grid>
             </Frame>
 
-            <Frame> <!--grid with przeliczniki Down-->
+            <Frame Style="{DynamicResource frame_style}"> <!--grid with przeliczniki Down-->
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition />
@@ -72,7 +62,7 @@
                 </Grid>
             </Frame>
 
-            <Frame> <!--klawiatura-->
+            <Frame Style="{DynamicResource frame_style}"> <!--klawiatura-->
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition />

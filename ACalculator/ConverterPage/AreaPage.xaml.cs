@@ -23,21 +23,20 @@ namespace ACalculator
         public AreaPage ()
 		{
 			InitializeComponent ();
-            Btn_addsubtract.IsEnabled = false;
-
-            pickerup.ItemsSource = cc.converterArea;
-			pickerup.SelectedIndex = 0;
-			pickerdown.ItemsSource = cc.converterArea;
-            pickerdown.SelectedIndex = 1;
-            EntryUpBool = true; EntryDownBool = false; ConvertCount = false;
-            _ = entryup.Focus();
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
 
-            entryup.Focus();
+            Btn_addsubtract.IsEnabled = false;
+
+            pickerup.ItemsSource = cc.ConverterArea;
+            pickerup.SelectedIndex = 0;
+            pickerdown.ItemsSource = cc.ConverterArea;
+            pickerdown.SelectedIndex = 1;
+            EntryUpBool = true; EntryDownBool = false; ConvertCount = false;
+            _ = entryup.Focus();
         }
 
         private void Pickerup_SelectedIndexChanged(object sender, EventArgs e)
@@ -192,8 +191,9 @@ namespace ACalculator
                         {
                             if (ConvertCount == false)
                             {
-                                entrydown.Text = cc.ConverterCount(Convert.ToDouble(entryup.Text),
-                                    Convert.ToDouble(entrydown.Text), (labelup.Text + "/" + labeldown.Text), noKeyboardEntry.TabIndex).ToString();
+                                entrydown.Text = cc.ConverterCount(Convert.ToDouble(entryup.Text.Replace(",", ".")),
+                                    Convert.ToDouble(entrydown.Text.Replace(",", ".")), (labelup.Text + "/" + labeldown.Text), 
+                                    noKeyboardEntry.TabIndex, "Area").ToString().Replace(".", ",");
                                 ConvertCount = true;
                             }
                         }
@@ -210,8 +210,9 @@ namespace ACalculator
                         {
                             if (ConvertCount == false)
                             {
-                                entryup.Text = cc.ConverterCount(Convert.ToDouble(entryup.Text),
-                                    Convert.ToDouble(entrydown.Text), (labeldown.Text + "/" + labelup.Text), noKeyboardEntry.TabIndex).ToString();
+                                entryup.Text = cc.ConverterCount(Convert.ToDouble(entryup.Text.Replace(",", ".")),
+                                    Convert.ToDouble(entrydown.Text.Replace(",", ".")), (labeldown.Text + "/" + labelup.Text), 
+                                    noKeyboardEntry.TabIndex, "Area").ToString().Replace(".", ",");
                                 ConvertCount = true;
                             }
                         }

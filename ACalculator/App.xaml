@@ -43,6 +43,10 @@
                 <Setter Property="MaxLength" Value="15"/>
                 <Setter Property="CursorPosition" Value="1"/>
             </Style>
+            <Style x:Key="frame_style" TargetType="Frame">
+                <Setter Property="Padding" Value="6"/>
+                <Setter Property="CornerRadius" Value="10"/>
+            </Style>
 
         </ResourceDictionary>
     </Application.Resources>

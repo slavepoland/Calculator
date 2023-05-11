@@ -12,10 +12,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Converter.xaml.cs" />
     <Compile Remove="ConverterPage\Numbers.xaml.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Remove="Converter.xaml" />
     <EmbeddedResource Remove="ConverterPage\Numbers.xaml" />
   </ItemGroup>
 
@@ -36,6 +38,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="ConverterPage\AreaPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="ConverterPage\HeadingPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="ConverterPage\LengthPage.xaml">
