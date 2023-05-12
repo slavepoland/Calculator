@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACalculator.ConverterPage;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -22,7 +23,8 @@ namespace ACalculator
 
         public AreaPage ()
 		{
-			InitializeComponent ();
+            InitializeComponent();
+            HeadingPage.labelHeadText.Text = "Powierzchnia     >>";
         }
 
         protected override void OnAppearing()
@@ -30,7 +32,7 @@ namespace ACalculator
             base.OnAppearing();
 
             Btn_addsubtract.IsEnabled = false;
-
+            
             pickerup.ItemsSource = cc.ConverterArea;
             pickerup.SelectedIndex = 0;
             pickerdown.ItemsSource = cc.ConverterArea;
@@ -43,7 +45,8 @@ namespace ACalculator
         {
             Picker pk = (Picker)sender;
             labelup.Text = pk.SelectedItem.ToString().Substring(pk.SelectedItem.ToString()
-                .LastIndexOf('(')).Replace("(", "").Replace(")", "");        
+                .LastIndexOf('(')).Replace("(", "").Replace(")", "");
+            _ = entryup.Focus();
         }
 
         private void Pickerdown_SelectedIndexChanged(object sender, EventArgs e)
@@ -51,6 +54,7 @@ namespace ACalculator
             Picker pk = (Picker)sender;
             labeldown.Text = pk.SelectedItem.ToString().Substring(pk.SelectedItem.ToString()
                 .LastIndexOf('(')).Replace("(", "").Replace(")", "");
+            _ = entrydown.Focus();
         }
 
         private void Entry_TextChanged(object sender, TextChangedEventArgs e)
@@ -129,17 +133,17 @@ namespace ACalculator
                     }
                 case 1: //arrow up button click
                     {
-                        _ = entryup.Focus();
                         Btn_up.IsEnabled = false;
                         Btn_down.IsEnabled = true;
+                        _ = entryup.Focus();
                         break;
                     }
                 case 2: //arrow down button click
                     {
-                        _ = entrydown.Focus();
                         Btn_up.IsEnabled = true;
                         Btn_down.IsEnabled = false;
-                    break;
+                        _ = entrydown.Focus();
+                        break;
                 }
                 case 3: //delete button click
                     {

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using ACalculator.ConverterPage;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,19 +11,223 @@ using Xamarin.Forms.Xaml;
 
 namespace ACalculator
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class LengthPage : ContentPage
-	{
-		public LengthPage ()
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class LengthPage : ContentPage
+    {
+        private bool EntryUpBool { get; set; }
+        private bool EntryDownBool { get; set; }
+        private bool ConvertCount { get; set; }
+
+        readonly Funkcje funkcje = new Funkcje();
+        readonly ConverterClass cc = new ConverterClass();
+
+        public LengthPage ()
 		{
             InitializeComponent();
-            Btn_addsubtract.IsEnabled = false;
-
-            //ConverterClass cc = new ConverterClass();
-            //picker.ItemsSource = cc.converterLength;
-            //picker.SelectedIndex = 4;
-            //picker1.ItemsSource = cc.converterLength;
-            //picker1.SelectedIndex = 1;
+            HeadingPage.labelHeadText.Text = "<<     Długość     >>";
         }
-	}
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            Btn_addsubtract.IsEnabled = false;
+            
+            pickerup.ItemsSource = cc.ConverterLength;
+            pickerup.SelectedIndex = 0;
+            pickerdown.ItemsSource = cc.ConverterLength;
+            pickerdown.SelectedIndex = 1;
+            EntryUpBool = true; EntryDownBool = false; ConvertCount = false;
+            _ = entryup.Focus();
+        }
+
+        private void Pickerup_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Picker pk = (Picker)sender;
+            labelup.Text = pk.SelectedItem.ToString().Substring(pk.SelectedItem.ToString()
+                .LastIndexOf('(')).Replace("(", "").Replace(")", "");
+            _ = entryup.Focus();
+        }
+
+        private void Pickerdown_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Picker pk = (Picker)sender;
+            labeldown.Text = pk.SelectedItem.ToString().Substring(pk.SelectedItem.ToString()
+                .LastIndexOf('(')).Replace("(", "").Replace(")", "");
+            _ = entrydown.Focus();
+        }
+
+        private void Entry_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(e.NewTextValue)) return;
+
+            if (!double.TryParse(e.NewTextValue, out double value))
+            {
+                ((Entry)sender).Text = value.ToString();//e.OldTextValue;
+            }
+        }
+
+        private void Btn_Clicked(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            switch(btn.TabIndex)
+            {
+                case 0: //numeric button click
+                    {
+                        if (EntryUpBool == true)
+                        {
+                            if ((entryup.Text.Length + btn.Text.Length) <= 15)
+                            {
+                                if (entryup.Text == "0" && btn.Text != ",")
+                                {
+                                    entryup.Text = btn.Text;
+                                }
+                                else
+                                {
+                                    if (entryup.Text.Contains(",") == false && btn.Text == ",")
+                                    {
+                                        entryup.Text += btn.Text;
+                                    }
+                                    else if (btn.Text.Contains(",") == false)
+                                    {
+                                        entryup.Text += btn.Text;
+                                    }
+                                }
+                                ConvertCount = false;
+                            }
+                            else
+                            {
+                                funkcje.NewPopup("Nie można wprowadzić więcej niż 15 cyfr!!!");
+                            }
+                            
+                            _ = entryup.Focus();
+                        }
+                        else if(EntryDownBool == true)
+                        {
+                            if ((entrydown.Text.Length + btn.Text.Length) <= 15)
+                            {
+                                if (entrydown.Text == "0" && btn.Text != ",")
+                                {
+                                    entrydown.Text = btn.Text;
+                                }
+                                else
+                                {
+                                    if (entrydown.Text.Contains(",") == false && btn.Text == ",")
+                                    {
+                                        entrydown.Text += btn.Text;
+                                    }
+                                    else if (btn.Text.Contains(",") == false)
+                                    {
+                                        entrydown.Text += btn.Text;
+                                    }
+                                }
+                                ConvertCount = false;
+                            }
+                            else
+                            {
+                                funkcje.NewPopup("Nie można wprowadzić więcej niż 15 cyfr!!!");
+                            }
+                            _ = entrydown.Focus();
+                        }
+                        break;
+                    }
+                case 1: //arrow up button click
+                    {
+                        Btn_up.IsEnabled = false;
+                        Btn_down.IsEnabled = true;
+                        _ = entryup.Focus();
+                        break;
+                    }
+                case 2: //arrow down button click
+                    {
+                        Btn_up.IsEnabled = true;
+                        Btn_down.IsEnabled = false;
+                        _ = entrydown.Focus();
+                        break;
+                }
+                case 3: //delete button click
+                    {
+                        ConvertCount = false;
+                        if (EntryUpBool == true)
+                        {
+                                if (entryup.Text.Length > 0)
+                                entryup.Text = entryup.Text.Remove(entryup.Text.Length-1, 1);
+                            _ = entryup.Focus();
+                        }
+                        else if (EntryDownBool == true)
+                        {
+                                if (entrydown.Text.Length > 0)
+                                entrydown.Text = entrydown.Text.Remove(entrydown.Text.Length - 1, 1);
+                            _ = entrydown.Focus();
+                        }
+                        break;
+                }
+                case 4: //clear button click
+                    {
+                        entryup.Text = "0";
+                        entrydown.Text = "0";
+                        _ = entryup.Focus();
+                        break;
+                    }
+
+            }
+
+        }
+
+        private void Entry_Focused(object sender, FocusEventArgs e)
+        {
+            if(entryup.Text == "" || entrydown.Text == "")
+            {
+                Btn_Clicked(Btn_clear, null);
+            }
+
+            Entry noKeyboardEntry = sender as Entry;
+            switch (noKeyboardEntry.TabIndex)
+            {
+                case 1:
+                {
+                    Btn_up.IsEnabled = false;
+                    Btn_down.IsEnabled = true;
+                    entryup.CursorPosition = entryup.Text.Length;
+                    EntryUpBool = true;
+                    EntryDownBool = false;
+                        if (entryup.Text != "0" && entryup.Text != "0,")
+                        {
+                            if (ConvertCount == false)
+                            {
+                                entrydown.Text = cc.ConverterCount(Convert.ToDouble(entryup.Text.Replace(",", ".")),
+                                    Convert.ToDouble(entrydown.Text.Replace(",", ".")), (labelup.Text + "/" + labeldown.Text), 
+                                    noKeyboardEntry.TabIndex, "Length").ToString().Replace(".", ",");
+                                ConvertCount = true;
+                            }
+                        }
+                        break; 
+                }
+                case 2:
+                {
+                    Btn_up.IsEnabled = true;
+                    Btn_down.IsEnabled = false;
+                    entrydown.CursorPosition = entrydown.Text.Length;
+                    EntryUpBool = false;
+                    EntryDownBool = true;
+                        if (entrydown.Text != "0" && entrydown.Text != "0,")
+                        {
+                            if (ConvertCount == false)
+                            {
+                                entryup.Text = cc.ConverterCount(Convert.ToDouble(entryup.Text.Replace(",", ".")),
+                                    Convert.ToDouble(entrydown.Text.Replace(",", ".")), (labeldown.Text + "/" + labelup.Text), 
+                                    noKeyboardEntry.TabIndex, "Length").ToString().Replace(".", ",");
+                                ConvertCount = true;
+                            }
+                        }
+                        break; 
+                }
+            }
+        }
+        
+    }
+
+    //public class NoKeyboardEntry : Entry
+    //{
+    //}
 }

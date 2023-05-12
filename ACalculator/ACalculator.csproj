@@ -34,6 +34,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="ConverterPage\TemperaturePage.xaml.cs">
+      <DependentUpon>TemperaturePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="ConverterPage\LengthPage.xaml.cs">
+      <DependentUpon>LengthPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Update="CarouselPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -41,12 +50,6 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="ConverterPage\HeadingPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="ConverterPage\LengthPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="ConverterPage\TemperaturePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="MyPopup.xaml">

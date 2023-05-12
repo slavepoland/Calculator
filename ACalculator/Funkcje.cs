@@ -59,7 +59,7 @@ namespace ACalculator
             MainPage.GridButton.HeightRequest = heightInDp * 0.6;
             try
             {
-                if (heightInDp <= 320)
+                if (heightInDp < 320)
                 {
                     MainPage.PasekWyniku.FontSize = 0.4f * fontSize;
                     MainPage.PasekFormuly.FontSize = 0.2f * fontSize;
@@ -73,43 +73,82 @@ namespace ACalculator
             }
             catch (Exception ex)
             {
-                NewPopup(ex.Message + ":Portrait, 320");
+                NewPopup(ex.Message + ":Portrait, <320");
             }
             try
             {
-                if (heightInDp > 320 && heightInDp < 720)
+                if (heightInDp >= 320 && heightInDp < 550)
                 {
                     MainPage.PasekWyniku.FontSize = 0.8f * fontSize;
                     MainPage.PasekFormuly.FontSize = 0.5f * fontSize;
                     foreach (var items in MainPage.GridButton.Children)
                     {
                         Button item = items as Button;
-                        item.FontSize = 0.45f * fontSize;
-                        item.Padding = 2;
+                        item.FontSize = 0.5f * fontSize;
+                        item.Padding = 4;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                NewPopup(ex.Message + ":Portrait, 320-549");
+            }
+            try
+            {
+                if (heightInDp >= 550 && heightInDp < 700)
+                {
+                    MainPage.PasekWyniku.FontSize = 0.75f * fontSize;
+                    MainPage.PasekInvisible.FontSize = 0.3f * fontSize;
+                    MainPage.PasekFormuly.FontSize = 0.45f * fontSize;
+                    foreach (var items in MainPage.GridButton.Children)
+                    {
+                        Button item = items as Button;
+                        item.FontSize = 0.6f * fontSize;
+                        item.Padding = 7;
                     }
                 }
             }
             catch(Exception ex) 
             {
-                NewPopup(ex.Message + ":Portrait, 321-719");
+                NewPopup(ex.Message + ":Portrait, 550-699");
             }
             try
             {
-                if (heightInDp >= 720)
+                if (heightInDp >= 700 && heightInDp < 800)
                 {
-                    MainPage.PasekWyniku.FontSize = 1.1f * fontSize;
-                    MainPage.PasekFormuly.FontSize = 0.5f * fontSize;
+                    MainPage.PasekWyniku.FontSize = 0.85f * fontSize;
+                    MainPage.PasekInvisible.FontSize = 0.5 * fontSize;
+                    MainPage.PasekFormuly.FontSize = 0.55f * fontSize;
                     foreach (var items in MainPage.GridButton.Children)
                     {
                         Button item = items as Button;
-                        item.FontSize = 0.7f * fontSize;
+                        item.FontSize = 0.65f * fontSize;
                         item.Padding = 10;
                     }
                 }
             }
             catch (Exception ex)
             {
-                NewPopup(ex.Message + ":Portrait, >720");
+                NewPopup(ex.Message + ":Portrait, 700-799");
+            }
+            try
+            {
+                if (heightInDp >= 800)
+                {
+                    MainPage.PasekWyniku.FontSize = 1.1f * fontSize;
+                    MainPage.PasekInvisible.FontSize = 0.75 * fontSize;
+                    MainPage.PasekFormuly.FontSize = 0.5f * fontSize;
+                    foreach (var items in MainPage.GridButton.Children)
+                    {
+                        Button item = items as Button;
+                        item.FontSize = 0.7f * fontSize;
+                        item.Padding = 15;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                NewPopup(ex.Message + ":Portrait, >=800");
             }
 
 
