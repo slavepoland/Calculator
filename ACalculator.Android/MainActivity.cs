@@ -8,6 +8,7 @@ using Android.Views.InputMethods;
 using Xamarin.Forms.Platform.Android;
 using System;
 using Android.Content;
+using ACalculator.Function;
 
 [assembly: ExportRenderer(typeof(NoKeyboardEntry), typeof(ACalculator.Droid.NoKeyboardEntryRenderer))]
 namespace ACalculator.Droid
@@ -22,6 +23,7 @@ namespace ACalculator.Droid
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            Funkcje funkcje = new Funkcje();
             base.OnCreate(savedInstanceState);
 
             Rg.Plugins.Popup.Popup.Init(this);
@@ -31,10 +33,12 @@ namespace ACalculator.Droid
                 WidthInDp = ConvertPixelsToDp(metrics.WidthPixels);
                 HeightInDp = ConvertPixelsToDp(metrics.HeightPixels);
             }
+            Global.WidthInDp = WidthInDp; 
+            Global.HeightInDp = HeightInDp;
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            LoadApplication(new App(WidthInDp, HeightInDp));
+            LoadApplication(new App());
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
@@ -49,11 +53,13 @@ namespace ACalculator.Droid
 
             if (newConfig.Orientation == Android.Content.Res.Orientation.Landscape)
             {
-                funkcje.ChangeFontAndPadding("landscape", WidthInDp, HeightInDp);
+                funkcje.ChangeFontAndPadding("landscape");
+                //funkcje.FontAndPaddingConverterPage("landscape");
             }
             else if (newConfig.Orientation == Android.Content.Res.Orientation.Portrait)
             {
-                funkcje.ChangeFontAndPadding("portrait", WidthInDp, HeightInDp);
+                funkcje.ChangeFontAndPadding("portrait");
+                //funkcje.FontAndPaddingConverterPage("portrait");
             }
         }
 

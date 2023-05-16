@@ -6,11 +6,11 @@ namespace ACalculator
 {
     public partial class App : Application
     {
-        public App(int widthInDp, int heightInDp)
+        public App()
         {
             InitializeComponent();
 
-            MainPage = new MainPage(widthInDp, heightInDp);
+            MainPage = new MainPage();
         }
 
         protected override void OnStart()

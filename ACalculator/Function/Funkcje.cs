@@ -6,12 +6,13 @@ using Xamarin.Forms;
 using System.Diagnostics;
 using Xamarin.Essentials;
 using Rg.Plugins.Popup.Services;
+using ACalculator.ConverterPage;
 
-namespace ACalculator
+namespace ACalculator.Function
 {
     public class Funkcje
-    {
-        public void NewPopup(string message)
+    {        
+        public void NewPopup(string message)  //show popup message
         {
             MyPopup popup = new MyPopup();
             popup.myPopup.FontSize = 15;
@@ -20,16 +21,15 @@ namespace ACalculator
             PopupNavigation.Instance.PushAsync(popup);
         }
 
-        public void ChangeFontAndPadding(string orientation, int widthInDp, int heightInDp)
+        public void ChangeFontAndPadding(string orientation)
         {
             float fontSize = 45;
-            //int padding = orientation.Contains("po") ? 15 : 0;
             try
             {
                 if (orientation.Contains("land"))
                 {
-                    MainPage.FrameText.HeightRequest = heightInDp * 0.5;
-                    MainPage.GridButton.HeightRequest = heightInDp * 0.5;
+                    MainPage.FrameText.HeightRequest = Global.HeightInDp * 0.5;
+                    MainPage.GridButton.HeightRequest = Global.HeightInDp * 0.5;
                     MainPage.PasekWyniku.FontSize = 0.7f * fontSize;
                     MainPage.PasekFormuly.FontSize = 0.4f * fontSize;
                     foreach (var items in MainPage.GridButton.Children)
@@ -40,7 +40,7 @@ namespace ACalculator
                     }
                     foreach (var items in MainPage.GridPages.Children)
                     {
-                        if(items is Button)
+                        if (items is Button)
                         {
                             Button item = items as Button;
                             item.FontSize = 0.28f * fontSize;
@@ -55,11 +55,11 @@ namespace ACalculator
                 NewPopup(ex.Message + ":Landscape");
             }
 
-            MainPage.FrameText.HeightRequest = heightInDp * 0.4;
-            MainPage.GridButton.HeightRequest = heightInDp * 0.6;
+            MainPage.FrameText.HeightRequest = Global.HeightInDp * 0.4;
+            MainPage.GridButton.HeightRequest = Global.HeightInDp * 0.6;
             try
             {
-                if (heightInDp < 320)
+                if (Global.HeightInDp < 320)
                 {
                     MainPage.PasekWyniku.FontSize = 0.4f * fontSize;
                     MainPage.PasekFormuly.FontSize = 0.2f * fontSize;
@@ -77,7 +77,7 @@ namespace ACalculator
             }
             try
             {
-                if (heightInDp >= 320 && heightInDp < 550)
+                if (Global.HeightInDp >= 320 && Global.HeightInDp < 550)
                 {
                     MainPage.PasekWyniku.FontSize = 0.8f * fontSize;
                     MainPage.PasekFormuly.FontSize = 0.5f * fontSize;
@@ -95,7 +95,7 @@ namespace ACalculator
             }
             try
             {
-                if (heightInDp >= 550 && heightInDp < 700)
+                if (Global.HeightInDp >= 550 && Global.HeightInDp < 700)
                 {
                     MainPage.PasekWyniku.FontSize = 0.75f * fontSize;
                     MainPage.PasekInvisible.FontSize = 0.3f * fontSize;
@@ -104,17 +104,17 @@ namespace ACalculator
                     {
                         Button item = items as Button;
                         item.FontSize = 0.6f * fontSize;
-                        item.Padding = 7;
+                        item.Padding = 6;
                     }
                 }
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 NewPopup(ex.Message + ":Portrait, 550-699");
             }
             try
             {
-                if (heightInDp >= 700 && heightInDp < 800)
+                if (Global.HeightInDp >= 700 && Global.HeightInDp < 800)
                 {
                     MainPage.PasekWyniku.FontSize = 0.85f * fontSize;
                     MainPage.PasekInvisible.FontSize = 0.5 * fontSize;
@@ -123,7 +123,7 @@ namespace ACalculator
                     {
                         Button item = items as Button;
                         item.FontSize = 0.65f * fontSize;
-                        item.Padding = 10;
+                        item.Padding = 8;
                     }
                 }
             }
@@ -133,7 +133,7 @@ namespace ACalculator
             }
             try
             {
-                if (heightInDp >= 800)
+                if (Global.HeightInDp >= 800)
                 {
                     MainPage.PasekWyniku.FontSize = 1.1f * fontSize;
                     MainPage.PasekInvisible.FontSize = 0.75 * fontSize;
@@ -150,8 +150,6 @@ namespace ACalculator
             {
                 NewPopup(ex.Message + ":Portrait, >=800");
             }
-
-
         }
 
         public string PasekFormuly(string pasekformuly, string InfoText)
@@ -185,7 +183,7 @@ namespace ACalculator
 
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 NewPopup(ex.Message + ":dla +,-,*,/");
             }
@@ -203,7 +201,7 @@ namespace ACalculator
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 NewPopup(ex.Message + ":wynik");
             }
@@ -218,7 +216,8 @@ namespace ACalculator
                         return _ = Global.PierwszaLiczba.ToString().Replace(".", ",") + " " + dzialanie + " "
                          + Global.DrugaLiczba.ToString().Replace(".", ",") + " =";
                 }
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 NewPopup(ex.Message + ":wynik");
             }
@@ -254,11 +253,11 @@ namespace ACalculator
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 NewPopup(ex.Message + ":oblicznia procent");
             }
-            
+
             return "";
         }
 
@@ -299,7 +298,7 @@ namespace ACalculator
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 NewPopup(ex.Message + ":pasek formuły spec");
             }
@@ -322,11 +321,11 @@ namespace ACalculator
                     case "Sqrt": Global.GlobalDzialanie = stringdzialanie; break;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 NewPopup(ex.Message + ":działanie");
             }
-            
+
         }
 
         public string UsunOstatniZnak(string tekst)
@@ -345,12 +344,12 @@ namespace ACalculator
             catch (Exception ex)
             {
                 NewPopup(ex.Message + ":usuń ostatni znak"); return "0";
-            } 
+            }
         }
 
         public string ClickLiczba(string textPaskaWyniku)
         {
-            if(textPaskaWyniku.Length > 15)
+            if (textPaskaWyniku.Length > 15)
             {
                 NewPopup("Nie można wprowadzić więcej niż 15 cyfr.");
                 return textPaskaWyniku;
@@ -412,7 +411,7 @@ namespace ACalculator
                         }
                         else
                         { //textPaskaWyniku = Global.GlobalTekstPasekWyniku2 + textPaskaWyniku;
-                            if(MainPage.PasekWyniku.Text != Global.PierwszaLiczba.ToString().Replace(".", ","))
+                            if (MainPage.PasekWyniku.Text != Global.PierwszaLiczba.ToString().Replace(".", ","))
                             {
                                 textPaskaWyniku = Global.GlobalTekstPasekWyniku2 + textPaskaWyniku;
                             }
@@ -429,7 +428,8 @@ namespace ACalculator
                     else { textPaskaWyniku = "0"; }
                     Global.GlobalTekstPasekWyniku2 = textPaskaWyniku;
                 }
-            } catch(Exception ex) { NewPopup(ex.Message + ":click druga liczba"); }
+            }
+            catch (Exception ex) { NewPopup(ex.Message + ":click druga liczba"); }
 
             return textPaskaWyniku;
         }

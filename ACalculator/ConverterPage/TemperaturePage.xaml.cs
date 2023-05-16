@@ -1,7 +1,9 @@
 ﻿using ACalculator.ConverterPage;
+using ACalculator.Function;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,18 +27,105 @@ namespace ACalculator
 		{
             InitializeComponent();
             HeadingPage.labelHeadText.Text = "<<     Temperatura     >>";
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            
+            //entryup.Text = "0"; entrydown.Text = "0";
             pickerup.ItemsSource = cc.ConverterTemperature;
             pickerup.SelectedIndex = 0;
             pickerdown.ItemsSource = cc.ConverterTemperature;
             pickerdown.SelectedIndex = 1;
             EntryUpBool = true; EntryDownBool = false; ConvertCount = false;
             _ = entryup.Focus();
+            FontAndPaddingConverterPage();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+        }
+
+        /// <summary>
+        /// change font and padding in TemperaturePage for diffrent Dp for all devices 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// 
+        private void FontAndPaddingConverterPage()
+        {
+            float fontSize = 45;
+            try
+            {
+                if (Global.HeightInDp < 320)
+                {
+                    foreach (Button item in buttonGrid.Children.Cast<Button>())
+                    {
+                        item.FontSize = 0.2f * fontSize;
+                        item.Padding = 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                funkcje.NewPopup(ex.Message + ":Portrait, <320");
+            }
+            try
+            {
+                if (Global.HeightInDp >= 320 && Global.HeightInDp < 550)
+                {
+                    foreach (Button item in buttonGrid.Children.Cast<Button>())
+                    {
+                        item.FontSize = 0.40f * fontSize;
+                        item.Padding = 3;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                funkcje.NewPopup(ex.Message + ":Portrait, 320-549");
+            }
+            try
+            {
+                if (Global.HeightInDp >= 550 && Global.HeightInDp < 700)
+                {
+                    foreach (Button item in buttonGrid.Children.Cast<Button>())
+                    {
+                        item.FontSize = 0.50f * fontSize;
+                        item.Padding = 6;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                funkcje.NewPopup(ex.Message + ":Portrait, 550-699");
+            }
+            try
+            {
+                if (Global.HeightInDp >= 700 && Global.HeightInDp < 800)
+                {
+                    foreach (Button item in buttonGrid.Children.Cast<Button>())
+                    {
+                        item.FontSize = 0.55f * fontSize;
+                        item.Padding = 10;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                funkcje.NewPopup(ex.Message + ":Portrait, 700-799");
+            }
+            try
+            {
+                if (Global.HeightInDp >= 800)
+                {
+                    foreach (Button item in buttonGrid.Children.Cast<Button>())
+                    {
+                        item.FontSize = 0.65f * fontSize;
+                        item.Padding = 15;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                funkcje.NewPopup(ex.Message + ":Portrait, >=800");
+            }
         }
 
         private void Pickerup_SelectedIndexChanged(object sender, EventArgs e)
@@ -69,6 +158,9 @@ namespace ACalculator
 
         private void Btn_Clicked(object sender, EventArgs e)
         {
+            _ = entryup.Text ?? (entryup.Text = "");
+            _ = entrydown.Text ?? (entrydown.Text = "");
+
             Button btn = (Button)sender;
             switch(btn.TabIndex)
             {
@@ -172,22 +264,35 @@ namespace ACalculator
                         ConvertCount = false;
                         if (EntryUpBool == true)
                         {
-                                if (entryup.Text.Length > 0)
-                                entryup.Text = entryup.Text.Remove(entryup.Text.Length-1, 1);
+                            if (entryup.Text.Length > 0)
+                            {
+                                entryup.Text = entryup.Text.Remove(entryup.Text.Length - 1, 1);
+                            }
+                            if(entryup.Text == "")
+                            {
+                                entryup.Text = "0";
+                            }
                             _ = entryup.Focus();
                         }
                         else if (EntryDownBool == true)
                         {
-                                if (entrydown.Text.Length > 0)
+                            if (entrydown.Text.Length > 0)
+                            {
                                 entrydown.Text = entrydown.Text.Remove(entrydown.Text.Length - 1, 1);
+                            }
+                            if (entrydown.Text == "")
+                            {
+                                entrydown.Text = "0";
+                            }
                             _ = entrydown.Focus();
                         }
                         break;
                 }
                 case 4: //clear button click
                     {
-                        entryup.Text = "0";
-                        entrydown.Text = "0";
+                        ConvertCount = false;
+                        entryup.Text = "";
+                        entrydown.Text = "";
                         _ = entryup.Focus();
                         break;
                     }
@@ -198,10 +303,15 @@ namespace ACalculator
 
         private void Entry_Focused(object sender, FocusEventArgs e)
         {
-            if(entryup.Text == "" || entrydown.Text == "")
+            if (entryup.Text == null && entrydown.Text == null)
             {
-                Btn_Clicked(Btn_clear, null);
+                return;
             }
+
+            //if (entryup.Text == "" || entrydown.Text == "")
+            //{
+            //    Btn_Clicked(Btn_clear, null);
+            //}
 
             Entry noKeyboardEntry = sender as Entry;
             switch (noKeyboardEntry.TabIndex)
@@ -210,18 +320,30 @@ namespace ACalculator
                 {
                     Btn_up.IsEnabled = false;
                     Btn_down.IsEnabled = true;
-                    entryup.CursorPosition = entryup.Text.Length;
+                        if (entryup.Text != null)
+                        { 
+                            entryup.CursorPosition = entryup.Text.Length; 
+                        }
                     EntryUpBool = true;
                     EntryDownBool = false;
                         if (entryup.Text != "0,")
                         {
-                            if (ConvertCount == false)
+                            try
                             {
-                                entrydown.Text = cc.ConverterCount(Convert.ToDouble(entryup.Text.Replace(",", ".")),
-                                    Convert.ToDouble(entrydown.Text.Replace(",", ".")), (labelup.Text + "/" + labeldown.Text), 
-                                    noKeyboardEntry.TabIndex, "Temperature").ToString().Replace(".", ",");
-                                ConvertCount = true;
+                                _ = entrydown.Text == "" ? entrydown.Text = "0" : entrydown.Text;
+
+                                if (ConvertCount == false && entryup.Text != "")
+                                {
+                                    entrydown.Text = Convert.ToString(cc.ConverterCount(Convert.ToDouble(entryup.Text.Replace(",", "."), CultureInfo.InvariantCulture),
+                                        Convert.ToDouble(entrydown.Text.Replace(",", "."), CultureInfo.InvariantCulture), (labelup.Text + "/" + labeldown.Text),
+                                        noKeyboardEntry.TabIndex, "Temperature"), CultureInfo.InvariantCulture).Replace(".", ",");
+                                    ConvertCount = true;
+                                }
                             }
+                            catch(Exception ex) 
+                            {
+                                funkcje.NewPopup(ex.Message + " Entry_Focused entryup");
+                            }    
                         }
                         break; 
                 }
@@ -234,12 +356,21 @@ namespace ACalculator
                     EntryDownBool = true;
                         if (entrydown.Text != "0,")
                         {
-                            if (ConvertCount == false)
+                            try
                             {
-                                entryup.Text = cc.ConverterCount(Convert.ToDouble(entryup.Text.Replace(",", ".")),
-                                    Convert.ToDouble(entrydown.Text.Replace(",", ".")), (labeldown.Text + "/" + labelup.Text), 
-                                    noKeyboardEntry.TabIndex, "Temperature").ToString().Replace(".", ",");
-                                ConvertCount = true;
+                                _ = entryup.Text == "" ? entryup.Text = "0" : entryup.Text;
+
+                                if (ConvertCount == false && entrydown.Text != "")
+                                {
+                                    entryup.Text = Convert.ToString(cc.ConverterCount(Convert.ToDouble(entryup.Text.Replace(",", "."), CultureInfo.InvariantCulture),
+                                        Convert.ToDouble(entrydown.Text.Replace(",", "."), CultureInfo.InvariantCulture), (labeldown.Text + "/" + labelup.Text),
+                                        noKeyboardEntry.TabIndex, "Temperature"), CultureInfo.InvariantCulture).Replace(".", ",");
+                                    ConvertCount = true;
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                funkcje.NewPopup(ex.Message + " Entry_Focused entrydown");
                             }
                         }
                         break; 

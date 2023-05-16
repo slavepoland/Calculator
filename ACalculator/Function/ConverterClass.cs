@@ -1,38 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
-namespace ACalculator
+namespace ACalculator.Function
 {
     public class ConverterClass
     {
         public List<string> ConverterArea = new List<string>()
         {
-            "Akry (ac)", 
-            "Ary (a)", 
-            "Hektary (ha)", 
+            "Akry (ac)",
+            "Ary (a)",
+            "Hektary (ha)",
             "Centymetry kwadratowe (cm2)",
-            "Stopy kwadratowe (ft2)", 
-            "Cale kwadratowe (in2)", 
+            "Stopy kwadratowe (ft2)",
+            "Cale kwadratowe (in2)",
             "Metry kwadratowe (m2)"
         };
         public List<string> ConverterLength = new List<string>()
         {
             "Milimetry (mm)",
-            "Centymetry (cm)", 
-            "Metry (m)", 
+            "Centymetry (cm)",
+            "Metry (m)",
             "Kilometry (km)",
-            "Cale (in)", 
-            "Stopy (ft)", 
-            "Jardy (yd)", 
-            "Mile (mi)", 
-            "Mile morskie (NM)", 
+            "Cale (in)",
+            "Stopy (ft)",
+            "Jardy (yd)",
+            "Mile (mi)",
+            "Mile morskie (NM)",
         };
         public List<string> ConverterTemperature = new List<string>()
         {
-            "Stopnie Celsjusza (C)", 
-            "Stopnie Fahrenheita (F)", 
+            "Stopnie Celsjusza (C)",
+            "Stopnie Fahrenheita (F)",
             "Stopnie Kelwina (K)",
         };
 
@@ -188,29 +189,23 @@ namespace ACalculator
 
         };
 
-        //public List<string> converterArea { get; }
-        //public List<string> converterLength { get; }
-        //public List<string> converterTemperature { get; }
 
-        public ConverterClass() 
+        public ConverterClass()
         {
-            //converterArea = ConverterArea;
-            //converterLength = ConverterLength;
-            //converterTemperature = ConverterTemperature;
         }
 
         public List<string> AddPickerItems(string listname)
         {
             switch (listname)
             {
-                case "Area": return ConverterArea; 
+                case "Area": return ConverterArea;
                 case "Length": return ConverterLength;
                 case "Temperature": return ConverterTemperature;
-                default : return ConverterArea;
+                default: return ConverterArea;
             }
         }
 
-        public double ConverterCount(double entryupvalue, double entrydownvalue, string converter, 
+        public double ConverterCount(double entryupvalue, double entrydownvalue, string converter,
             int tabIndex, string convertername)
         {
             Dictionary<string, double> kvp;
@@ -227,11 +222,11 @@ namespace ACalculator
                 default: kvp = kvpArea; break;
             }
 
-            switch(tabIndex)
+            switch (tabIndex)
             {
                 case 1:
                     {
-                        result = entryupvalue * 
+                        result = entryupvalue *
                             kvp.Where(x => x.Key == converter)
                             .Select(x => x.Value).FirstOrDefault();
                         break;
@@ -239,7 +234,7 @@ namespace ACalculator
                     }
                 case 2:
                     {
-                        result = entrydownvalue * 
+                        result = entrydownvalue *
                             kvp.Where(x => x.Key == converter)
                             .Select(x => x.Value).FirstOrDefault();
                         break;
@@ -261,7 +256,7 @@ namespace ACalculator
                         switch (converter)
                         {
                             case "C/C": result = entryupvalue; break;
-                            case "C/F": result = (entryupvalue * 1.8) + 32; break; //°F = (°C × 1.8) + 32
+                            case "C/F": result = entryupvalue * 1.8 + 32; break; //°F = (°C × 1.8) + 32
                             case "C/K": result = entryupvalue + 273.15; break; //	K = °C + 273.15
 
                             case "F/C": result = (entryupvalue - 32) / 1.8; break; //°C = (°F − 32) / 1.8   
@@ -269,7 +264,7 @@ namespace ACalculator
                             case "F/K": result = (entryupvalue + 459.67) * 5 / 9; break;   //K = (°F + 459.67) × 5/9
 
                             case "K/C": result = entryupvalue - 273.15; break; //°C = K − 273.15
-                            case "K/F": result = (entryupvalue * 1.8) - 459.67; break; //°F = (K × 1.8) - 459.67
+                            case "K/F": result = entryupvalue * 1.8 - 459.67; break; //°F = (K × 1.8) - 459.67
                             case "K/K": result = entryupvalue; break;
                         }
                         break;
@@ -279,7 +274,7 @@ namespace ACalculator
                         switch (converter)
                         {
                             case "C/C": result = entrydownvalue; break;
-                            case "C/F": result = (entrydownvalue * 1.8) + 32; break; //°F = (°C × 1.8) + 32
+                            case "C/F": result = entrydownvalue * 1.8 + 32; break; //°F = (°C × 1.8) + 32
                             case "C/K": result = entrydownvalue + 273.15; break; //	K = °C + 273.15
 
                             case "F/C": result = (entrydownvalue - 32) / 1.8; break; //°C = (°F − 32) / 1.8   
@@ -287,7 +282,7 @@ namespace ACalculator
                             case "F/K": result = (entrydownvalue + 459.67) * 5 / 9; break;   //K = (°F + 459.67) × 5/9
 
                             case "K/C": result = entrydownvalue - 273.15; break; //°C = K − 273.15
-                            case "K/F": result = (entrydownvalue * 1.8) - 459.67; break; //°F = (K × 1.8) - 459.67
+                            case "K/F": result = entrydownvalue * 1.8 - 459.67; break; //°F = (K × 1.8) - 459.67
                             case "K/K": result = entrydownvalue; break;
                         }
                         break;

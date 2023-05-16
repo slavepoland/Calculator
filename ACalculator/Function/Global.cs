@@ -1,10 +1,10 @@
-﻿namespace ACalculator
+﻿namespace ACalculator.Function
 {
     public partial class Global
-    {        
-        public Global() 
-        { 
-        
+    {
+        public Global()
+        {
+
         }
 
         private static bool boolPierwszaLiczba = true;
@@ -32,6 +32,9 @@
         public static string GlobalInfoText { get => globalInfoText; set => globalInfoText = value; }
         public static double PierwszaLiczba { get => pierwszaLiczba; set => pierwszaLiczba = value; }
         public static double DrugaLiczba { get => drugaLiczba; set => drugaLiczba = value; }
+
+        public static int WidthInDp { get; set; }
+        public static int HeightInDp { get; set; }
     }
 
 

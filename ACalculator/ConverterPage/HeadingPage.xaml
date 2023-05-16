@@ -4,9 +4,9 @@
              x:Class="ACalculator.ConverterPage.HeadingPage">
   <ContentView.Content>
         <StackLayout >
-            <Frame Style="{DynamicResource frame_style}">
+            <Frame  Style="{DynamicResource frame_style}">
                 <!--nagłówek-->
-                <Grid>
+                <Grid x:Name="headingGrid">
                     <Grid.RowDefinitions>
                         <RowDefinition />
                     </Grid.RowDefinitions>
@@ -16,7 +16,7 @@
                     </Grid.ColumnDefinitions>
                     <Button Text="Powrót" Clicked="Button_Clicked" Style="{DynamicResource button_style}"
                             Padding="0" FontSize="15" Grid.Row="0" Grid.Column="0" HorizontalOptions="Start" />
-                    <Label x:Name="labelHeadText"  Grid.Row="0" Grid.Column="1" FontSize="Title"
+                    <Label x:Name="labelHeadText"  Grid.Row="0" Grid.Column="1" FontSize="18"
                            VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
                 </Grid>
             </Frame>

@@ -1,7 +1,9 @@
 ﻿using ACalculator.ConverterPage;
+using ACalculator.Function;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,20 +27,107 @@ namespace ACalculator
 		{
             InitializeComponent();
             HeadingPage.labelHeadText.Text = "Powierzchnia     >>";
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-
             Btn_addsubtract.IsEnabled = false;
-            
+
             pickerup.ItemsSource = cc.ConverterArea;
             pickerup.SelectedIndex = 0;
             pickerdown.ItemsSource = cc.ConverterArea;
             pickerdown.SelectedIndex = 1;
             EntryUpBool = true; EntryDownBool = false; ConvertCount = false;
             _ = entryup.Focus();
+
+            FontAndPaddingConverterPage();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+        }
+
+        /// <summary>
+        /// change font and padding in AreaPage for diffrent Dp for all devices 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// 
+        private void FontAndPaddingConverterPage()
+        {
+            float fontSize = 45;
+            try
+            {
+                if (Global.HeightInDp < 320)
+                {
+                    foreach (Button item in buttonGrid.Children.Cast<Button>())
+                    {
+                        item.FontSize = 0.2f * fontSize;
+                        item.Padding = 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                funkcje.NewPopup(ex.Message + ":Portrait, <320");
+            }
+            try
+            {
+                if (Global.HeightInDp >= 320 && Global.HeightInDp < 550)
+                {
+                    foreach (Button item in buttonGrid.Children.Cast<Button>())
+                    {
+                        item.FontSize = 0.40f * fontSize;
+                        item.Padding = 3;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                funkcje.NewPopup(ex.Message + ":Portrait, 320-549");
+            }
+            try
+            {
+                if (Global.HeightInDp >= 550 && Global.HeightInDp < 700)
+                {
+                    foreach (Button item in buttonGrid.Children.Cast<Button>())
+                    {
+                        item.FontSize = 0.50f * fontSize;
+                        item.Padding = 6;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                funkcje.NewPopup(ex.Message + ":Portrait, 550-699");
+            }
+            try
+            {
+                if (Global.HeightInDp >= 700 && Global.HeightInDp < 800)
+                {
+                    foreach (Button item in buttonGrid.Children.Cast<Button>())
+                    {
+                        item.FontSize = 0.55f * fontSize;
+                        item.Padding = 10;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                funkcje.NewPopup(ex.Message + ":Portrait, 700-799");
+            }
+            try
+            {
+                if (Global.HeightInDp >= 800)
+                {
+                    foreach (Button item in buttonGrid.Children.Cast<Button>())
+                    {
+                        item.FontSize = 0.65f * fontSize;
+                        item.Padding = 15;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                funkcje.NewPopup(ex.Message + ":Portrait, >=800");
+            }
         }
 
         private void Pickerup_SelectedIndexChanged(object sender, EventArgs e)
@@ -46,6 +135,7 @@ namespace ACalculator
             Picker pk = (Picker)sender;
             labelup.Text = pk.SelectedItem.ToString().Substring(pk.SelectedItem.ToString()
                 .LastIndexOf('(')).Replace("(", "").Replace(")", "");
+            ConvertCount = false;
             _ = entryup.Focus();
         }
 
@@ -54,12 +144,13 @@ namespace ACalculator
             Picker pk = (Picker)sender;
             labeldown.Text = pk.SelectedItem.ToString().Substring(pk.SelectedItem.ToString()
                 .LastIndexOf('(')).Replace("(", "").Replace(")", "");
+            ConvertCount = false;
             _ = entrydown.Focus();
         }
 
         private void Entry_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (string.IsNullOrEmpty(e.NewTextValue)) return;
+            if (!string.IsNullOrEmpty(e.NewTextValue)) return;
 
             if (!double.TryParse(e.NewTextValue, out double value))
             {
@@ -164,6 +255,7 @@ namespace ACalculator
                 }
                 case 4: //clear button click
                     {
+                        ConvertCount = false;
                         entryup.Text = "0";
                         entrydown.Text = "0";
                         _ = entryup.Focus();
@@ -195,9 +287,9 @@ namespace ACalculator
                         {
                             if (ConvertCount == false)
                             {
-                                entrydown.Text = cc.ConverterCount(Convert.ToDouble(entryup.Text.Replace(",", ".")),
-                                    Convert.ToDouble(entrydown.Text.Replace(",", ".")), (labelup.Text + "/" + labeldown.Text), 
-                                    noKeyboardEntry.TabIndex, "Area").ToString().Replace(".", ",");
+                                entrydown.Text = Convert.ToString(cc.ConverterCount(Convert.ToDouble(entryup.Text.Replace(",", "."), CultureInfo.InvariantCulture),
+                                        Convert.ToDouble(entrydown.Text.Replace(",", "."), CultureInfo.InvariantCulture), (labelup.Text + "/" + labeldown.Text),
+                                        noKeyboardEntry.TabIndex, "Area")).Replace(".", ",");
                                 ConvertCount = true;
                             }
                         }
@@ -214,9 +306,9 @@ namespace ACalculator
                         {
                             if (ConvertCount == false)
                             {
-                                entryup.Text = cc.ConverterCount(Convert.ToDouble(entryup.Text.Replace(",", ".")),
-                                    Convert.ToDouble(entrydown.Text.Replace(",", ".")), (labeldown.Text + "/" + labelup.Text), 
-                                    noKeyboardEntry.TabIndex, "Area").ToString().Replace(".", ",");
+                                entryup.Text = Convert.ToString(cc.ConverterCount(Convert.ToDouble(entryup.Text.Replace(",", "."), CultureInfo.InvariantCulture),
+                                        Convert.ToDouble(entrydown.Text.Replace(",", "."), CultureInfo.InvariantCulture), (labeldown.Text + "/" + labelup.Text),
+                                        noKeyboardEntry.TabIndex, "Area")).Replace(".", ",");
                                 ConvertCount = true;
                             }
                         }

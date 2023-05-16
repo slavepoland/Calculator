@@ -1,16 +1,16 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace ACalculator
+namespace ACalculator.ViewModel
 {
     public class MyViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected bool SetProperty<T>(ref T field, T newValue, [CallerMemberName] string propertyName = null)
         {
-            if (!(object.Equals(field, newValue)))
+            if (!Equals(field, newValue))
             {
-                field = (newValue);
+                field = newValue;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
                 return true;
             }

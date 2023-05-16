@@ -2,12 +2,12 @@
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
-namespace ACalculator
+namespace ACalculator.Function
 {
     public class Result
     {
         readonly Funkcje funkcje = new Funkcje();
-        public Result() 
+        public Result()
         { }
 
         public string LiczProcent(string PodajZnakDzialania) //obliczanie %(np.6%z50 to 3) z podanej liczby, aby go wyświetlić na ekranie(PasekWyniku)
@@ -23,7 +23,8 @@ namespace ACalculator
                     case "spec": return (Global.PierwszaLiczba /= 100).ToString();
                     default: return "0";
                 }
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 funkcje.NewPopup(ex.Message + ":LiczProcent(PodaZnakDziałania)"); return "0";
             }
@@ -41,7 +42,7 @@ namespace ACalculator
                         case "-": return Global.PierwszaLiczba -= Global.PierwszaLiczba * Global.DrugaLiczba / 100;
                         case "/": return Global.PierwszaLiczba /= Global.DrugaLiczba;
                         case "x": return Global.PierwszaLiczba *= Global.DrugaLiczba;
-                        default:  return 0;
+                        default: return 0;
                     }
                 }
             }
@@ -68,7 +69,7 @@ namespace ACalculator
             catch (Exception ex)
             {
                 funkcje.NewPopup(ex.Message + ":LiczDrugaLiczbaProcent()"); return 0;
-            }   
+            }
         }
 
         public double Licz()
@@ -83,14 +84,14 @@ namespace ACalculator
                         case "-": return Global.PierwszaLiczba -= Global.DrugaLiczba;
                         case "/":
                             {
-                                if(Global.DrugaLiczba == 0)
+                                if (Global.DrugaLiczba == 0)
                                 {
                                     funkcje.NewPopup("Nie można dzielić przez zero!!!"); return 0;
                                 }
                                 else
                                 {
                                     return Global.PierwszaLiczba /= Global.DrugaLiczba;
-                                }  
+                                }
                             }
                         case "x": return Global.PierwszaLiczba *= Global.DrugaLiczba;
                         case "^": return Global.PierwszaLiczba = Math.Pow(Global.PierwszaLiczba, Global.DrugaLiczba);
@@ -107,7 +108,7 @@ namespace ACalculator
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 funkcje.NewPopup(ex.Message + ":Licz()"); return 0;
             }
@@ -125,10 +126,10 @@ namespace ACalculator
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 funkcje.NewPopup(ex.Message + ":Licz() 1/x"); return 0;
-            }            
+            }
             return 0;
         }
 
@@ -145,22 +146,22 @@ namespace ACalculator
                 else
                     return 0;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 funkcje.NewPopup(ex.Message + ":LiczSpecjane()"); return 0;
             }
-            
+
         }
 
         public double Licz(double lp, double dl, string znak) //not used
         {
-            switch(znak)
+            switch (znak)
             {
                 case "+": return lp + dl;
                 case "-": return lp - dl;
                 case "*": return lp * dl;
                 case "/": return lp / dl;
-                default:return 0;
+                default: return 0;
             }
         }
     }

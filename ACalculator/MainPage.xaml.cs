@@ -3,53 +3,27 @@ using System;
 using System.Globalization;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using ACalculator;
+using ACalculator.Function;
 
 namespace ACalculator
 {
     public partial class MainPage : ContentPage
     {
-        public int WidthInDp { get; }
-        public int HeightInDp { get; }
-
         private const int ValueZero = 0;
         readonly Funkcje funkcje = new Funkcje();
         readonly Result result = new Result();
 
-        public MainPage(int widthInDp, int heightInDp)
+        public MainPage()
         {
             InitializeComponent();
-            WidthInDp = widthInDp;
-            HeightInDp = heightInDp;
 
-            //AppTheme theme = AppInfo.RequestedTheme;
-            //switch (theme)
-            //{
-            //    case AppTheme.Light:
-            //        PasekWyniku.TextColor = Color.Black;
-            //        break;
-            //    case AppTheme.Dark:
-            //        PasekWyniku.TextColor = Color.Black;
-            //        break;
-            //}
-
-            if (HeightInDp <= 320)
-            {
-                funkcje.ChangeFontAndPadding("small", WidthInDp, HeightInDp);
-            }
-            else if(HeightInDp >= 320 && HeightInDp < 720)
-            {
-                funkcje.ChangeFontAndPadding("medium", WidthInDp, HeightInDp);
-            }
-            else
-            {
-                funkcje.ChangeFontAndPadding("large", WidthInDp, HeightInDp);
-            }
+            funkcje.ChangeFontAndPadding("small");
         }
 
         protected void BtnClick(object sender, EventArgs e)
         {
-            PasekWyniku.Text = funkcje.ClickLiczba((sender as Button).Text);
+            if((sender as Button).Text != "( )")
+                PasekWyniku.Text = funkcje.ClickLiczba((sender as Button).Text);
         }
 
         protected void BtnPrzecinek_Click(object sender, EventArgs e)
@@ -230,67 +204,6 @@ namespace ACalculator
         {//App.Current.MainPage = new Converter();
             //await Navigation.PushModalAsync(new CarouselPage());  //Converter()
         }
-
-
-
-        //public void Btn_Clicked(object sender, EventArgs e)
-        //{
-        //    Button button = (Button)sender;
-        //    if (button.Text == "C")
-        //    {
-        //        PasekWyniku.Text = "0"; return;
-        //    }
-
-        //    if (PasekWyniku.Text == "0")
-        //        if (PasekWyniku.Text == "0" && button.Text.Contains(","))
-        //            PasekWyniku.Text = "0" + button.Text;
-        //        else
-        //            PasekWyniku.Text = button.Text;
-        //    else
-        //    {
-        //        if (PasekWyniku.Text.Contains("-0") && Convert.ToInt16(button.Text) > 0
-        //            && Convert.ToInt16(button.Text) < 9)
-        //        {
-        //            PasekWyniku.Text = "(" + PasekWyniku.Text.Remove(1, 1) + button.Text;
-        //            return;
-        //        }
-
-        //        if (!PasekWyniku.Text.Contains(",") 
-        //            || (PasekWyniku.Text.Contains(",") && !button.Text.Contains(",")))
-        //            PasekWyniku.Text += button.Text;
-        //    }
-        //}
-
-        //private void Btn_delete_Clicked(object sender, EventArgs e)
-        //{
-        //    string number = PasekWyniku.Text;
-        //    if (number != "0")
-        //    {
-        //        number = number.Remove(number.Length - 1, 1);
-        //        if(string.IsNullOrEmpty(number))
-        //        {
-        //            PasekWyniku.Text = "0";     
-        //        }
-        //        else
-        //        {
-        //            PasekWyniku.Text = number;
-        //        }
-        //    }
-        //}
-
-        //private void Btn_addsubtract_Clicked(object sender, EventArgs e)
-        //{
-        //    Button button = (Button)sender;
-        //    if (button.Text == "+/-" && !PasekWyniku.Text.Contains("-"))
-        //    {
-        //        PasekWyniku.Text = "-" + PasekWyniku.Text; return;
-        //    }
-        //    else if(button.Text == "+/-" && PasekWyniku.Text.Contains("-"))
-        //    {
-        //        PasekWyniku.Text = PasekWyniku.Text.Remove(0, 1); return;
-        //    }
-        //}
-
 
     }
 }

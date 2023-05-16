@@ -40,7 +40,10 @@
             
         </StackLayout>
 
-
+        <Line HeightRequest="5" BackgroundColor="WhiteSmoke">
+            <!--<Label Text="test" HorizontalOptions="Center" HeightRequest="1"/>-->
+        </Line>    
+        
         <Grid x:Name="GridButton">
             <Grid.RowDefinitions>
                 <RowDefinition />
@@ -61,7 +64,7 @@
                     ImageSource="ic_shortcut_backspace.png" Clicked="BtnDelete" Style="{DynamicResource button_style}"/>-->
             <!-- row number 1-->
             <Button x:Name="Btn_reciprocal" Text="1/x"  Grid.Row="0" Grid.Column="0" Clicked="BtnWynik_Click" Style="{DynamicResource btn_operation}"/>
-            <Button x:Name="Btn_bracket" Text="( )"  Grid.Row="0" Grid.Column="1" Style="{DynamicResource btn_operation}"/>
+            <Button x:Name="Btn_bracket" Text="( )"  Grid.Row="0" Grid.Column="1" Clicked="BtnClick" Style="{DynamicResource btn_operation}"/>
             <Button x:Name="Btn_divide" Text="%"  Grid.Row="0" Grid.Column="2" Clicked="BtnProcent_Click" Style="{DynamicResource btn_operation}"/>
             <Button x:Name="Btn_division" Text="/"  Grid.Row="0" Grid.Column="3" Clicked="BtnDzialanie" Style="{DynamicResource btn_operation}"/>
 

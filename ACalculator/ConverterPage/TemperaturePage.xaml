@@ -9,7 +9,7 @@
             <local1:HeadingPage/>
 
             <Frame Style="{DynamicResource frame_style}"> <!--grid with przeliczniki Up-->
-                <Grid>
+                <Grid x:Name="pickerUpGrid">
                     <Grid.RowDefinitions>
                         <RowDefinition />
                     </Grid.RowDefinitions>
@@ -29,14 +29,14 @@
                         </Picker>
                     </Grid>
                     
-                    <local:NoKeyboardEntry  x:Name="entryup" TabIndex="1" Focused="Entry_Focused" Text="0" Grid.Row="1" Grid.Column="0"
+                    <local:NoKeyboardEntry  x:Name="entryup" TabIndex="1" Focused="Entry_Focused" Grid.Row="1" Grid.Column="0"
                             TextChanged="Entry_TextChanged" Style="{DynamicResource entry_converter}"/>
                     <Label x:Name="labelup" Grid.Row="1" Grid.Column="1" VerticalTextAlignment="End"/>
                 </Grid>
             </Frame>
 
             <Frame Style="{DynamicResource frame_style}"> <!--grid with przeliczniki Down-->
-                <Grid>
+                <Grid x:Name="pickerDownGrid">
                     <Grid.RowDefinitions>
                         <RowDefinition />
                     </Grid.RowDefinitions>
@@ -56,14 +56,14 @@
                         </Picker>
                     </Grid>
 
-                    <local:NoKeyboardEntry  x:Name="entrydown" TabIndex="2" Focused="Entry_Focused" Text="0" Grid.Row="1" Grid.Column="0"
+                    <local:NoKeyboardEntry  x:Name="entrydown" TabIndex="2" Focused="Entry_Focused" Grid.Row="1" Grid.Column="0"
                             TextChanged="Entry_TextChanged" Style="{DynamicResource entry_converter}"/>
                     <Label x:Name="labeldown" Grid.Row="1" Grid.Column="1" VerticalTextAlignment="End"/>
                 </Grid>
             </Frame>
 
             <Frame Style="{DynamicResource frame_style}"> <!--klawiatura-->
-                <Grid>
+                <Grid x:Name="buttonGrid">
                     <Grid.RowDefinitions>
                         <RowDefinition />
                         <RowDefinition />
@@ -88,21 +88,21 @@
                     <Button x:Name="Btn_four" Text="4" Grid.Row="1" Grid.Column="0" Style="{DynamicResource btn_converter}" Clicked="Btn_Clicked"/>
                     <Button x:Name="Btn_five" Text="5" Grid.Row="1" Grid.Column="1" Style="{DynamicResource btn_converter}" Clicked="Btn_Clicked"/>
                     <Button x:Name="Btn_six" Text="6" Grid.Row="1" Grid.Column="2" Style="{DynamicResource btn_converter}" Clicked="Btn_Clicked"/>
-                    <Button x:Name="Btn_clear" TabIndex="4" ImageSource="ic_c.png" TextColor="Red" Grid.Row="1" Grid.Column="3" Style="{DynamicResource btn_converter}"
+                    <Button x:Name="Btn_clear" TabIndex="4" ImageSource="ic_c.png" Grid.Row="1" Grid.Column="3" Style="{DynamicResource btn_converter}"
                             Clicked="Btn_Clicked"/>
 
                     <!-- row number 3-->
                     <Button x:Name="Btn_one" Text="1" Grid.Row="2" Grid.Column="0" Style="{DynamicResource btn_converter}" Clicked="Btn_Clicked"/>
                     <Button x:Name="Btn_two" Text="2" Grid.Row="2" Grid.Column="1" Style="{DynamicResource btn_converter}" Clicked="Btn_Clicked"/>
                     <Button x:Name="Btn_three" Text="3" Grid.Row="2" Grid.Column="2" Style="{DynamicResource btn_converter}" Clicked="Btn_Clicked"/>
-                    <Button x:Name="Btn_up" TabIndex="1"  ImageSource="arrow_up.png" HorizontalOptions="Center" Grid.Row="2" Grid.Column="3" Style="{DynamicResource btn_converter}"
+                    <Button x:Name="Btn_up" TabIndex="1"  ImageSource="arrow_up.png" Grid.Row="2" Grid.Column="3" Style="{DynamicResource btn_converter}"
                             Clicked="Btn_Clicked"/>
 
                     <!-- row number 4-->
                     <Button x:Name="Btn_addsubtract" Text="+/-" Grid.Row="3" Grid.Column="0" Style="{DynamicResource btn_converter}" Clicked="Btn_Clicked"/>
                     <Button x:Name="Btn_zero" Text="0" Grid.Row="3" Grid.Column="1" Style="{DynamicResource btn_converter}" Clicked="Btn_Clicked"/>
                     <Button x:Name="Btn_comma" Text="," Grid.Row="3" Grid.Column="2" Style="{DynamicResource btn_converter}" Clicked="Btn_Clicked"/>
-                    <Button x:Name="Btn_down" TabIndex="2" ImageSource="arrow_down" HorizontalOptions="Center" Grid.Row="3" Grid.Column="3" Style="{DynamicResource btn_converter}"
+                    <Button x:Name="Btn_down" TabIndex="2" ImageSource="arrow_down.png" Grid.Row="3" Grid.Column="3" Style="{DynamicResource btn_converter}"
                             Clicked="Btn_Clicked"/>
                 </Grid>
             </Frame>

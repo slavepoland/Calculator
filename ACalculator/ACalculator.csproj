@@ -43,7 +43,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="CarouselPage.xaml">
+    <EmbeddedResource Update="ConverterPage\CarouselPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="ConverterPage\AreaPage.xaml">
