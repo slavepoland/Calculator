@@ -1,4 +1,5 @@
-﻿using ACalculator.ConverterPage;
+﻿
+using ACalculator.ConverterPage;
 using ACalculator.Function;
 using System;
 using System.Collections.Generic;

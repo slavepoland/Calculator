@@ -14,27 +14,27 @@
                     <Label x:Name="PasekWyniku" Text="0" FontSize="45" FontAttributes="Bold" HorizontalOptions="End" />
 
                     <Grid x:Name="GridPages">
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
+                        <Grid.RowDefinitions>
                             <RowDefinition />
-                        </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Button x:Name="Btn_history" Text="Historia" Grid.Row="1" Grid.Column="0" Style="{StaticResource btn_pages}"
-                            ImageSource="history.png" Clicked="Btn_History"/>
-                    <Button x:Name="Btn_converter" Text="Przel. jedn" Grid.Row="1" Grid.Column="1" Style="{StaticResource btn_pages}"
-                            ImageSource="line.png" Clicked="Btn_converter_Clicked"/>
-                    <Button x:Name="Btn_clear" Text="C" Grid.Row="1" Grid.Column="3" Clicked="BtnDelete" 
-                                Style="{DynamicResource btn_pages}" ImageSource="ic_c.png"/>
-                    <Button x:Name="Btn_delete" Text="Del" Grid.Row="1" Grid.Column="4" Style="{StaticResource btn_pages}" 
-                               ImageSource="ic_shortcut_backspace.png" Clicked="BtnDelete"/>
-                        <!--⌫-->
-                </Grid>
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="Btn_history" Text="Historia" Grid.Row="2" Grid.Column="0" Style="{StaticResource btn_pages}"
+                                ImageSource="history.png" Clicked="Btn_History"/>
+                        <Button x:Name="Btn_converter" Text="Przel. jedn" Grid.Row="2" Grid.Column="1" Style="{StaticResource btn_pages}"
+                                ImageSource="line.png" Clicked="Btn_converter_Clicked"/>
+                        <Button x:Name="Btn_clear" Text="C" Grid.Row="2" Grid.Column="3" Clicked="BtnDelete" 
+                                    Style="{DynamicResource btn_pages}" ImageSource="ic_c.png"/>
+                        <Button x:Name="Btn_delete" Text="Del" Grid.Row="2" Grid.Column="4" Style="{StaticResource btn_pages}" 
+                                   ImageSource="ic_shortcut_backspace.png" Clicked="BtnDelete"/>
+                            <!--⌫-->
+                    </Grid>
                 </StackLayout>
             </Frame>
             
@@ -44,7 +44,7 @@
             <!--<Label Text="test" HorizontalOptions="Center" HeightRequest="1"/>-->
         </Line>    
         
-        <Grid x:Name="GridButton">
+        <Grid x:Name="GridButton"> <!--keyboard-->
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition />

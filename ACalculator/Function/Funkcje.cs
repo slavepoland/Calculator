@@ -1,12 +1,8 @@
 ﻿using System;
-using System.ComponentModel.Design;
 using System.Globalization;
 using System.Linq;
 using Xamarin.Forms;
-using System.Diagnostics;
-using Xamarin.Essentials;
 using Rg.Plugins.Popup.Services;
-using ACalculator.ConverterPage;
 
 namespace ACalculator.Function
 {
@@ -28,14 +24,15 @@ namespace ACalculator.Function
             {
                 if (orientation.Contains("land"))
                 {
-                    MainPage.FrameText.HeightRequest = Global.HeightInDp * 0.5;
-                    MainPage.GridButton.HeightRequest = Global.HeightInDp * 0.5;
-                    MainPage.PasekWyniku.FontSize = 0.7f * fontSize;
-                    MainPage.PasekFormuly.FontSize = 0.4f * fontSize;
+                    MainPage.FrameText.HeightRequest = Global.HeightInDp * 0.4;
+                    MainPage.GridButton.HeightRequest = Global.HeightInDp * 0.6;
+                    MainPage.PasekWyniku.FontSize = 0.50f * fontSize;
+                    MainPage.PasekInvisible.FontSize = 0f;
+                    MainPage.PasekFormuly.FontSize = 0.33f * fontSize;
                     foreach (var items in MainPage.GridButton.Children)
                     {
                         Button item = items as Button;
-                        item.FontSize = 0.28f * fontSize;
+                        item.FontSize = 0.25f * fontSize;
                         item.Padding = 0;
                     }
                     foreach (var items in MainPage.GridPages.Children)
@@ -43,7 +40,7 @@ namespace ACalculator.Function
                         if (items is Button)
                         {
                             Button item = items as Button;
-                            item.FontSize = 0.28f * fontSize;
+                            item.FontSize = 0.25f * fontSize;
                             item.Padding = 0;
                         }
                     }
@@ -52,16 +49,26 @@ namespace ACalculator.Function
             }
             catch (Exception ex)
             {
-                NewPopup(ex.Message + ":Landscape");
+                NewPopup(ex.Message + ":Landscape"); return;
             }
 
             MainPage.FrameText.HeightRequest = Global.HeightInDp * 0.4;
             MainPage.GridButton.HeightRequest = Global.HeightInDp * 0.6;
+                foreach (var items in MainPage.GridPages.Children)
+                {
+                    if (items is Button)
+                    {
+                        Button item = items as Button;
+                        item.FontSize = 0.62f * fontSize;
+                        item.Padding = 15;
+                    }
+                }
             try
             {
                 if (Global.HeightInDp < 320)
                 {
                     MainPage.PasekWyniku.FontSize = 0.4f * fontSize;
+                    MainPage.PasekInvisible.FontSize = 0.2f * fontSize;
                     MainPage.PasekFormuly.FontSize = 0.2f * fontSize;
                     foreach (var items in MainPage.GridButton.Children)
                     {
@@ -69,6 +76,7 @@ namespace ACalculator.Function
                         item.FontSize = 0.3f * fontSize;
                         item.Padding = 0;
                     }
+                    return;
                 }
             }
             catch (Exception ex)
@@ -80,13 +88,15 @@ namespace ACalculator.Function
                 if (Global.HeightInDp >= 320 && Global.HeightInDp < 550)
                 {
                     MainPage.PasekWyniku.FontSize = 0.8f * fontSize;
+                    MainPage.PasekInvisible.FontSize = 0.3f * fontSize;
                     MainPage.PasekFormuly.FontSize = 0.5f * fontSize;
                     foreach (var items in MainPage.GridButton.Children)
                     {
                         Button item = items as Button;
-                        item.FontSize = 0.5f * fontSize;
+                        item.FontSize = 0.45f * fontSize;
                         item.Padding = 4;
                     }
+                    return;
                 }
             }
             catch (Exception ex)
@@ -106,6 +116,7 @@ namespace ACalculator.Function
                         item.FontSize = 0.6f * fontSize;
                         item.Padding = 6;
                     }
+                    return;
                 }
             }
             catch (Exception ex)
@@ -125,6 +136,7 @@ namespace ACalculator.Function
                         item.FontSize = 0.65f * fontSize;
                         item.Padding = 8;
                     }
+                    return;
                 }
             }
             catch (Exception ex)
@@ -144,6 +156,7 @@ namespace ACalculator.Function
                         item.FontSize = 0.7f * fontSize;
                         item.Padding = 15;
                     }
+                    return;
                 }
             }
             catch (Exception ex)

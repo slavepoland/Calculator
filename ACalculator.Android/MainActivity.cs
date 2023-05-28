@@ -23,7 +23,6 @@ namespace ACalculator.Droid
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            Funkcje funkcje = new Funkcje();
             base.OnCreate(savedInstanceState);
 
             Rg.Plugins.Popup.Popup.Init(this);

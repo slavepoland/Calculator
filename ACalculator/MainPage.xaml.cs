@@ -59,7 +59,7 @@ namespace ACalculator
                     PasekWyniku.Text = Global.GlobalTekstPasekWyniku = funkcje.UsunOstatniZnak(PasekWyniku.Text);
                     try
                     {
-                        Global.PierwszaLiczba = Convert.ToDouble(PasekWyniku.Text);
+                        Global.PierwszaLiczba = Convert.ToDouble(PasekWyniku.Text.Replace(",", "."));
                     }
                     catch { Global.PierwszaLiczba = ValueZero; }
                     return;
